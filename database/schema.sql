@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS eism_db;
+USE eism_db;
+
+CREATE TABLE IF NOT EXISTS admins (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    password_salt VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(30) NOT NULL,
+    department VARCHAR(80) NOT NULL,
+    position VARCHAR(80) NOT NULL,
+    salary DECIMAL(12, 2) NOT NULL,
+    hire_date DATE NOT NULL
+);
