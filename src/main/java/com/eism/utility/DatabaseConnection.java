@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public final class DatabaseConnection {
+    // Prevents creating this utility class.
     private DatabaseConnection() { }
 
+    // Reads the settings and opens the MySQL connection.
     public static Connection open() throws SQLException {
         Properties settings = new Properties();
         try (InputStream file = DatabaseConnection.class.getClassLoader().getResourceAsStream("db.properties")) {

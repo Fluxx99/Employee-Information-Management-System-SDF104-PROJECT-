@@ -7,7 +7,11 @@ import java.sql.SQLException;
 public class LoginController {
     private final AuthService auth;
     private final ConsoleView view;
+
+    // Creates the login controller.
     public LoginController(AuthService auth, ConsoleView view) { this.auth = auth; this.view = view; }
+
+    // Shows the login screen and checks the login details.
     public boolean login() throws SQLException {
         view.title();
         boolean valid = auth.authenticate(view.read("Username: "), view.readPassword("Password: "));

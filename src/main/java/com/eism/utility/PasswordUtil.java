@@ -13,12 +13,14 @@ public class PasswordUtil {
     private static final int KEY_LENGTH = 256;
     private static final int SALT_LENGTH = 16;
 
+    // Creates a random salt.
     public String createSalt() {
         byte[] salt = new byte[SALT_LENGTH];
         new SecureRandom().nextBytes(salt);
         return Base64.getEncoder().encodeToString(salt);
     }
 
+    // Converts a password into a secure hash.
     public String hash(String password, String salt) {
         try {
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(),
@@ -32,6 +34,7 @@ public class PasswordUtil {
         }
     }
 
+    // Checks a password against the saved hash.
     public boolean matches(String password, String expectedHash, String salt) {
         return MessageDigest.isEqual(
                 Base64.getDecoder().decode(hash(password, salt)),

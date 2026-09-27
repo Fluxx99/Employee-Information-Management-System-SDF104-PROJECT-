@@ -8,8 +8,11 @@ import java.sql.SQLException;
 public class EmployeeController {
     private final EmployeeService service;
     private final ConsoleView view;
+
+    // Creates the employee controller.
     public EmployeeController(EmployeeService service, ConsoleView view) { this.service = service; this.view = view; }
 
+    // Shows the employee menu and handles the selected option.
     public void run() {
         while (true) {
             view.menu();
@@ -29,6 +32,7 @@ public class EmployeeController {
         }
     }
 
+    // Gets new employee details and updates the employee.
     private void update() throws SQLException {
         int id = Integer.parseInt(view.read("Employee ID: "));
         Employee employee = view.readEmployee();
@@ -36,6 +40,7 @@ public class EmployeeController {
         view.message(service.update(employee) ? "Employee updated." : "Employee not found.");
     }
 
+    // Deletes an employee using the employee ID.
     private void delete() throws SQLException {
         int id = Integer.parseInt(view.read("Employee ID: "));
         view.message(service.delete(id) ? "Employee deleted." : "Employee not found.");

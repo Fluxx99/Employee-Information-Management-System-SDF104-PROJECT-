@@ -8,8 +8,11 @@ import java.util.List;
 
 public class EmployeeDao {
     private final Connection connection;
+
+    // Creates the employee database object.
     public EmployeeDao(Connection connection) { this.connection = connection; }
 
+    // Finds employees by name, email, or department.
     public List<Employee> search(String search) throws SQLException {
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT * FROM employees WHERE first_name LIKE ? OR last_name LIKE ? "
@@ -24,18 +27,21 @@ public class EmployeeDao {
         return employees;
     }
 
+    // Adds a new employee to MySQL.
     public void add(Employee employee) throws SQLException {
         String sql = "INSERT INTO employees (first_name, last_name, email, phone, department, position, salary, hire_date) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         save(sql, employee, false);
     }
 
+    // Updates an existing employee.
     public boolean update(Employee employee) throws SQLException {
         String sql = "UPDATE employees SET first_name=?, last_name=?, email=?, phone=?, "
                 + "department=?, position=?, salary=?, hire_date=? WHERE id=?";
         return save(sql, employee, true) > 0;
     }
 
+    // Deletes an employee by ID.
     public boolean delete(int id) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("DELETE FROM employees WHERE id=?")) {
             statement.setInt(1, id);
@@ -43,6 +49,7 @@ public class EmployeeDao {
         }
     }
 
+    // Saves employee data for an insert or update.
     private int save(String sql, Employee e, boolean update) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, e.getFirstName()); statement.setString(2, e.getLastName());
@@ -54,6 +61,7 @@ public class EmployeeDao {
         }
     }
 
+    // Converts a database row into an Employee object.
     private Employee fromResult(ResultSet result) throws SQLException {
         Employee e = new Employee();
         e.setId(result.getInt("id")); e.setFirstName(result.getString("first_name"));

@@ -11,8 +11,10 @@ public class AdminDao {
     private final Connection connection;
     private final PasswordUtil passwordUtil = new PasswordUtil();
 
+    // Creates the admin database object.
     public AdminDao(Connection connection) { this.connection = connection; }
 
+    // Checks if the admins table is empty.
     public boolean isEmpty() throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM admins");
              ResultSet result = statement.executeQuery()) {
@@ -21,6 +23,7 @@ public class AdminDao {
         }
     }
 
+    // Creates an admin and saves the password hash.
     public void create(String username, String password) throws SQLException {
         String salt = passwordUtil.createSalt();
         String sql = "INSERT INTO admins (username, password_hash, password_salt) VALUES (?, ?, ?)";
@@ -32,6 +35,7 @@ public class AdminDao {
         }
     }
 
+    // Checks if the username and password are correct.
     public boolean authenticate(String username, String password) throws SQLException {
         String sql = "SELECT password_hash, password_salt FROM admins WHERE username = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
