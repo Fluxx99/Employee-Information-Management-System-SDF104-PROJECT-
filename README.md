@@ -6,14 +6,14 @@ This is a simple terminal program made with Java, Maven, and MySQL. The code is 
 
 - JDK 17 or newer
 - MySQL Server and MySQL Workbench
-- Maven (needed for the normal build, but VS Code can run existing compiled files)
+- Maven
 - VS Code Extension Pack for Java, or another Java IDE
 
 ## First-time setup
 
 1. Open MySQL Workbench and connect to your local MySQL server.
 2. Open `database/schema.sql` and execute all of it. This creates `eism_db`, `admins`, and `employees`.
-3. Open `src/main/resources/db.properties`.
+3. Copy `src/main/resources/db.properties.example` to `src/main/resources/db.properties`.
 4. Set the values to your own MySQL login:
 
 ```properties
@@ -31,35 +31,18 @@ mvn clean compile
 6. Run `src/main/java/com/eism/Main.java`.
 7. The first run asks you to create an admin username and password. You do not need to manually insert an admin row.
 
-## Running without Maven
-
-If `target/classes` already exists, run `com.eism.Main` from the IDE. Maven is still recommended after changing source code.
-
 ## Windows commands
 
-Install Maven by downloading it, extracting it to `C:\Users\YourName\maven`, and adding its `bin` folder to the user PATH. After opening a new terminal, check it with:
-
-```text
-mvn -version
-```
-
-From the project folder, build and test with:
+From the project folder:
 
 ```text
 cd C:\Users\YourName\Desktop\projects\EISM
 mvn clean test
 mvn clean package
-```
-
-Maven downloads MySQL Connector/J automatically from `pom.xml`.
-
-To start the program with Maven, keep the `-D` option together:
-
-```text
 mvn compile exec:java "-Dexec.mainClass=com.eism.Main"
 ```
 
-Do not put a space between `-D` and `exec.mainClass`. Run this in a normal terminal because the program asks for input.
+Maven downloads MySQL Connector/J automatically from `pom.xml`.
 
 ## Program menu
 
