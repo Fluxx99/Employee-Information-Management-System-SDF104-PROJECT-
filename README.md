@@ -1,6 +1,6 @@
 # Employee Information Management System
 
-This is a simple terminal program made with Java, Maven, and MySQL. The code is organized into small controller, DAO, model, service, utility, view, and exception packages.
+This is a simple terminal program made with Java, Maven, and MySQL. The code is organized into controller, DAO, model, service, utility, view, and exception packages.
 
 ## What is needed
 

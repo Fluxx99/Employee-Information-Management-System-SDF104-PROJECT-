@@ -34,3 +34,5 @@ Thumbs.db
 # Generated modernization/tooling files
 .github/modernize/
 .github/java-upgrade/
+
+.fake

@@ -10,7 +10,10 @@ public class EmployeeController {
     private final ConsoleView view;
 
     // Creates the employee controller.
-    public EmployeeController(EmployeeService service, ConsoleView view) { this.service = service; this.view = view; }
+    public EmployeeController(EmployeeService service, ConsoleView view) {
+        this.service = service;
+        this.view = view;
+    }
 
     // Shows the employee menu and handles the selected option.
     public void run() {
@@ -20,10 +23,15 @@ public class EmployeeController {
                 switch (view.read("Choose: ")) {
                     case "1" -> view.showEmployees(service.search(""));
                     case "2" -> view.showEmployees(service.search(view.read("Search: ")));
-                    case "3" -> { service.add(view.readEmployee()); view.message("Employee added."); }
+                    case "3" -> {
+                        service.add(view.readEmployee());
+                        view.message("Employee added.");
+                    }
                     case "4" -> update();
                     case "5" -> delete();
-                    case "6" -> { return; }
+                    case "6" -> {
+                        return;
+                    }
                     default -> view.message("Invalid option.");
                 }
             } catch (SQLException | IllegalArgumentException e) {

@@ -9,7 +9,10 @@ public class LoginController {
     private final ConsoleView view;
 
     // Creates the login controller.
-    public LoginController(AuthService auth, ConsoleView view) { this.auth = auth; this.view = view; }
+    public LoginController(AuthService auth, ConsoleView view) {
+        this.auth = auth;
+        this.view = view;
+    }
 
     // Shows the login screen and checks the login details.
     public boolean login() throws SQLException {

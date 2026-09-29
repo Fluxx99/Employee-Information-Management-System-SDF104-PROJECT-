@@ -1,7 +1,6 @@
 package com.eism.dao;
 
 import com.eism.utility.PasswordUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,9 @@ public class AdminDao {
     private final PasswordUtil passwordUtil = new PasswordUtil();
 
     // Creates the admin database object.
-    public AdminDao(Connection connection) { this.connection = connection; }
+    public AdminDao(Connection connection) {
+        this.connection = connection;
+    }
 
     // Checks if the admins table is empty.
     public boolean isEmpty() throws SQLException {
